@@ -1,0 +1,356 @@
+/* Général */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1e1e2e;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1, h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* Barre de navigation */
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .navbar a,
+  .dropbtn {
+    background-color: #2d2d3a;
+    color: #b8b8b8;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  
+  .navbar .dropdown .dropbtn:hover {
+    background-color: #4c4c68;
+  }
+  
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2d2d3a;
+    min-width: 220px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: left;
+  }
+  
+  .dropdown-content a {
+    color: #b8b8b8;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #444;
+  }
+  
+  .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #4c4c68;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Tableau */
+  #tableauSemaine {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #29293d;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #444;
+    padding: 15px;
+    font-size: 16px;
+  }
+  
+  th {
+    background-color: #3a3a5e;
+    color: #ffffff;
+  }
+  
+  td {
+    height: 120px;
+    vertical-align: top;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  td:hover {
+    background-color: #4c4c68;
+  }
+  
+  /* Suppression du hover sur la case Mardi */
+  td[data-day="Mardi"]:hover {
+    background-color: inherit;
+    cursor: default;
+  }
+  
+  /* Bouton de téléchargement */
+  #downloadButton {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #downloadButton:hover {
+    background-color: #45a049;
+  }
+  
+  /* Particules */
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  /* Bannière défilante */
+  .game-banner {
+    width: 100%;
+    overflow: hidden;
+    background-color: #2d2d3a;
+    border-top: 2px solid #444;
+    border-bottom: 2px solid #444;
+    padding: 10px 0;
+    margin-top: 30px;
+  }
+  
+  .banner-track {
+    display: flex;
+    width: fit-content;
+    animation: scrollLoop 40s linear infinite;
+    cursor: grab;
+  }
+  
+  .banner-track.dragging {
+    animation-play-state: paused;
+    cursor: grabbing;
+  }
+  
+  .track-content {
+    display: flex;
+  }
+  
+  .track-content a {
+    flex: 0 0 auto;
+    margin: 0 15px;
+  }
+  
+  .track-content img {
+    height: 150px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    pointer-events: auto;
+  }
+  
+  .track-content img:hover {
+    transform: scale(1.1);
+    z-index: 2;
+  }
+  
+  @keyframes scrollLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-20%); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    td, th {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    td {
+      height: 80px;
+    }
+  
+    .dropdown-content {
+      position: static;
+      width: 100%;
+    }
+  
+    .track-content img {
+      height: 100px;
+      margin: 0 10px;
+    }
+  }
+  
+  /* Thème clair */
+  body.light-mode {
+    background-color: #f4f4f9;
+    color: #2c2c2c;
+  }
+  
+  body.light-mode .theme-switch-wrapper {
+    background: rgba(255,255,255,0.7);
+    color: #000;
+  }
+  
+  body.light-mode .game-banner {
+    background-color: #e6ddfb;
+  }
+  
+  body.light-mode #tableauSemaine {
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  body.light-mode #tableauSemaine th,
+  body.light-mode #tableauSemaine td {
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+  }
+  
+  body.light-mode #tableauSemaine td[contenteditable="true"] {
+    outline: 2px solid #a78bfa;
+    background-color: #f3e8ff;
+  }
+  
+  /* Dropdowns en mode clair */
+  body.light-mode .dropbtn {
+    background-color: #d9d4f0;
+    color: #333;
+    border: none;
+  }
+  
+  body.light-mode .dropbtn:hover {
+    background-color: #c3b5ec;
+  }
+  
+  body.light-mode .dropdown-content {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  body.light-mode .dropdown-content a {
+    color: #333;
+  }
+  
+  body.light-mode .dropdown-content a:hover {
+    background-color: #f0f0ff;
+    color: #4b0082;
+  }
+  
+  /* Bouton thème */
+  .theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 0.9rem;
+    z-index: 10;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  
+  .theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+  }
+  
+  .theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #4caf50;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(24px);
+  }
+  
+  body.light-mode {
+    background-color: #d1c4e9;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 20px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  #installBtn {
+    margin: 1rem auto;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #installBtn:hover {
+    background-color: #218838;
+  }

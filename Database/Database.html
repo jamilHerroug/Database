@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Database</title>
+  <link rel="icon" href="/Favicon/Logo/D_Favicon_Database.png" />
+  <link rel="apple-touch-icon" href="/Favicon/Logo/D_Favicon_Database.png">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script defer src="main.js"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+  </style>
+  <script>
+    function loadParticles(theme = 'dark') {
+      let color = theme === 'dark' ? '#ffffff' : '#333333';
+      let bgColor = theme === 'dark' ? '#1e1e2e' : '#f4f4f4';
+
+      tsParticles.load("particles-js", {
+        fullScreen: { enable: true, zIndex: -1 },
+        particles: {
+          number: { value: 60 },
+          color: { value: color },
+          shape: { type: "circle" },
+          opacity: { value: 0.3 },
+          size: { value: 2 },
+          links: {
+            enable: true,
+            color: color,
+            opacity: 0.2,
+            distance: 150
+          },
+          move: {
+            enable: true,
+            speed: 1,
+            outModes: "bounce"
+          }
+        },
+        interactivity: {
+          events: {
+            onHover: { enable: true, mode: "repulse" },
+            onClick: { enable: true, mode: "push" }
+          },
+          modes: {
+            repulse: { distance: 100 },
+            push: { quantity: 4 }
+          }
+        },
+        background: { color: bgColor }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const isLightMode = document.body.classList.contains("light-mode");
+      loadParticles(isLightMode ? 'light' : 'dark');
+
+      document.getElementById('themeToggle')?.addEventListener('click', () => {
+        const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+        loadParticles(theme);
+      });
+    });
+
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log("✅ Service Worker enregistré"))
+        .catch(err => console.error("❌ Erreur Service Worker :", err));
+}
+
+    if (track) {
+        const images = track.querySelectorAll("img");
+
+        images.forEach(img => {
+            img.addEventListener("dblclick", () => {
+                const steamURL = img.getAttribute("data-steam");
+                if (steamURL) {
+                    window.location.href = steamURL;
+                }
+            });
+        });
+    }
+  </script>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <header>
+    <h1>Navigation</h1>
+  </header>
+
+	<nav class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">Listen/View Station ▾</button>
+      <div class="dropdown-content">
+          <a href="https://www.youtube.com" target="_blank">YouTube</a>
+          <a href="https://www.twitch.tv" target="_blank">Twitch</a>
+          <a href="https://www.patreon.com/home" target="_blank">Patreon</a>
+          <a href="https://www.netflix.com/browse" target="_blank">Netflix</a>
+          <a href="https://www.disneyplus.com/fr-ca/home" target="_blank">Disney +</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Marketplace ▾</button>
+      <div class="dropdown-content">
+          <a href="https://www.amazon.ca/-/fr/ref=nav_logo" target="_blank">Amazon</a>
+          <A href="https://fr.weareholy.com" target="_blank">HOLY</A>
+          <a href="https://secretlabchairs.ca/fr" target="_blank">Secret Lab</a>
+          <a href="https://scufgaming.com" target="_blank">Scuf Gaming</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">School ▾</button>
+      <div class="dropdown-content">
+          <a href="https://chatgpt.com" target="_blank">ChatGPT</a>
+          <a href="page_cours.html" target="_blank">Mes Cours</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Gaming ▾</button>
+      <div class="dropdown-content">
+        <a href="https://mapgenie.io/subnautica" target="_blank">Subnautica Map</a>
+        <a href="https://mapgenie.io/enshrouded" target="_blank">Enshrouded Map</a>
+        <a href="https://genshin-impact-map.appsample.com" target="_blank">Genshin Map</a>
+        <a href="https://genshin-center.com/planner" target="_blank">Genshin Planner</a>
+        <a href="https://wuthering-waves-map.appsample.com" target="blank">Wuthering Waves Map</a>
+        <a href="https://wuthering.gg" target="blank">Wuthering Waves Planner</a>
+        <a href="https://mapgenie.io/elden-ring/maps/the-lands-between" target="_blank">Elden Ring Map</a>
+        <a href="https://rdr2map.com" target="_blank">RDR2 Map</a>
+        <a href="https://www.instant-gaming.com/fr/?igr=operagx-browser-us" target="_blank">Instant Gaming</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Calendrier Hebdomadaire</h2>
+      <table id="tableauSemaine">
+        <thead>
+          <tr>
+            <th>Dimanche</th>
+            <th>Lundi</th>
+            <th>Mardi</th>
+            <th>Mercredi</th>
+            <th>Jeudi</th>
+            <th>Vendredi</th>
+            <th>Samedi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td onclick="editCell(this, 0)"></td>
+            <td onclick="editCell(this, 1)"></td>
+            <td onclick="editCell(this, 2)"></td>
+            <td onclick="editCell(this, 3)"></td>
+            <td onclick="editCell(this, 4)"></td>
+            <td onclick="editCell(this, 5)"></td>
+            <td onclick="editCell(this, 6)"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="game-banner">
+      <div class="banner-track">
+        <div class="track-content">
+          <img src="images/Elden Ring.jpg" alt="Elden Ring" data-steam="" target="_blank">
+        <img src="Images/Monster-Hunter-World-Iceborne-PC.jpg" alt="Monster Hunter World" data-steam="" target="_blank">
+          <img src="images/Subnautica.jpg" alt="Subnautica" data-steam="" target="_blank">
+          <img src="images/Enshrouded.jpg" alt="Enshrouded" data-steam="" target="_blank">
+          <img src="images/Genshin-Impact.jpg" alt="Genshin Impact" data-steam="" target="_blank">
+          <img src="images/Wuthering-Waves.jpg" alt="Wuthering Waves" data-steam="steam://run/3513350" target="_blank">
+          <img src="images/Red Dead Redemption.jpg" alt="Red Dead Redemption 2" data-steam="" target="_blank">
+      </div>
+      <div class="track-content">
+          <img src="images/Elden Ring.jpg" alt="Elden Ring" data-steam="" target="_blank">
+          <img src="Images/Monster-Hunter-World-Iceborne-PC.jpg" alt="Monster Hunter World" data-steam="" target="_blank">
+          <img src="images/Subnautica.jpg" alt="Subnautica" data-steam="" target="_blank"> 
+          <img src="images/Enshrouded.jpg" alt="Enshrouded" data-steam="" target="_blank">
+          <img src="images/Genshin-Impact.jpg" alt="Genshin Impact" data-steam="" target="_blank">
+          <img src="images/Wuthering-Waves.jpg" alt="Wuthering Waves" data-steam="steam://run/3513350" target="_blank">
+          <img src="images/Red Dead Redemption.jpg" alt="Red Dead Redemption 2" data-steam="" target="_blank">
+      </div>
+      <div class="track-content">
+        <img src="images/Elden Ring.jpg" alt="Elden Ring" data-steam="" target="_blank">
+        <img src="Images/Monster-Hunter-World-Iceborne-PC.jpg" alt="Monster Hunter World" data-steam="" target="_blank">
+        <img src="images/Subnautica.jpg" alt="Subnautica" data-steam="" target="_blank">
+        <img src="images/Enshrouded.jpg" alt="Enshrouded" data-steam="" target="_blank">
+        <img src="images/Genshin-Impact.jpg" alt="Genshin Impact" data-steam="" target="_blank">
+        <img src="images/Wuthering-Waves.jpg" alt="Wuthering Waves" data-steam="steam://run/3513350" target="_blank"> 
+        <img src="images/Red Dead Redemption.jpg" alt="Red Dead Redemption 2" data-steam="" target="_blank">
+    </div>
+    <div class="track-content">
+      <img src="images/Elden Ring.jpg" alt="Elden Ring" data-steam="" target="_blank">
+      <img src="Images/Monster-Hunter-World-Iceborne-PC.jpg" alt="Monster Hunter World" data-steam="" target="_blank">
+      <img src="images/Subnautica.jpg" alt="Subnautica" data-steam="" target="_blank">
+      <img src="images/Enshrouded.jpg" alt="Enshrouded" data-steam="" target="_blank">
+      <img src="images/Genshin-Impact.jpg" alt="Genshin Impact" data-steam="" target="_blank">
+      <img src="images/Wuthering-Waves.jpg" alt="Wuthering Waves" data-steam="steam://run/3513350" target="_blank">
+      <img src="images/Red Dead Redemption.jpg" alt="Red Dead Redemption 2" data-steam="" target="_blank">
+  </div>
+    </div>
+  </div>
+      </div>
+    </section>
+
+    <button id="downloadButton" style="display: none;">Télécharger l'application</button>
+  </main>
+
+  <footer>
+    <div id="clock"></div>
+    <div id="meteo"></div>
+    <button id="installBtn" hidden>Installer l'application</button>
+  </footer>
+  <script>
+    // Horloge en temps réel
+    function updateClock() {
+      const now = new Date();
+      const clock = document.getElementById("clock");
+      if (clock) {
+        clock.textContent = now.toLocaleTimeString("fr-FR");
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  
+    // Thème clair/sombre
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+  
+    function initTheme() {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (saved === "light" || (!saved && !prefersDark)) {
+        document.body.classList.add("light-mode");
+      }
+    }
+    initTheme();
+  
+    // Météo géolocalisée
+    navigator.geolocation?.getCurrentPosition(pos => {
+      const { latitude, longitude } = pos.coords;
+      fetch(`https://wttr.in/${latitude},${longitude}?format=1`)
+        .then(res => res.text())
+        .then(data => {
+          const meteo = document.createElement("div");
+          meteo.textContent = `🌦️ Météo: ${data.trim()}`;
+          Object.assign(meteo.style, {
+            position: "fixed",
+            bottom: "10px",
+            left: "10px",
+            background: "rgba(0,0,0,0.6)",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "10px",
+            zIndex: 1000
+          });
+          document.body.appendChild(meteo);
+        });
+    });
+  
+    // Calendrier éditable
+    function editCell(cell, index) {
+      cell.setAttribute("contenteditable", "true");
+      cell.focus();
+      cell.onblur = () => {
+        cell.removeAttribute("contenteditable");
+        saveData(index, cell.innerHTML);
+      };
+    }
+  
+    function saveData(index, text) {
+      let calendarData = JSON.parse(localStorage.getItem("calendarData")) || [];
+      calendarData[index] = text;
+      localStorage.setItem("calendarData", JSON.stringify(calendarData));
+    }
+  
+    function loadCalendar() {
+      const cells = document.querySelectorAll("#tableauSemaine td");
+      if (!cells.length) return;
+      const calendarData = JSON.parse(localStorage.getItem("calendarData")) || [];
+      cells.forEach((cell, index) => {
+        if (calendarData[index]) {
+          cell.innerHTML = calendarData[index];
+        }
+        cell.onclick = () => editCell(cell, index);
+      });
+    }
+  
+    document.addEventListener("DOMContentLoaded", loadCalendar);
+  
+    // PWA - bouton d'installation
+    let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); // Empêche le prompt automatique
+  deferredPrompt = e;
+  installBtn.hidden = false;
+});
+
+installBtn.addEventListener('click', () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choiceResult => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('L\'utilisateur a accepté l\'installation');
+      } else {
+        console.log('L\'utilisateur a refusé l\'installation');
+      }
+      deferredPrompt = null;
+      installBtn.hidden = true;
+    });
+  }
+});
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('✅ beforeinstallprompt déclenché');
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.hidden = false;
+});
+  
+    // Bannière défilante drag/touch
+    const bannerTrack = document.querySelector(".banner-track");
+    if (bannerTrack) {
+      let isDown = false, startX, scrollLeft;
+  
+      bannerTrack.addEventListener("mousedown", (e) => {
+        isDown = true;
+        bannerTrack.classList.add("dragging");
+        startX = e.pageX - bannerTrack.offsetLeft;
+        scrollLeft = bannerTrack.scrollLeft;
+        e.preventDefault();
+      });
+  
+      ["mouseleave", "mouseup"].forEach(event =>
+        bannerTrack.addEventListener(event, () => {
+          isDown = false;
+          bannerTrack.classList.remove("dragging");
+        })
+      );
+  
+      bannerTrack.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        const x = e.pageX - bannerTrack.offsetLeft;
+        bannerTrack.scrollLeft = scrollLeft - (x - startX) * 1.5;
+      });
+  
+      bannerTrack.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].pageX - bannerTrack.offsetLeft;
+        scrollLeft = bannerTrack.scrollLeft;
+      });
+  
+      bannerTrack.addEventListener("touchmove", (e) => {
+        const x = e.touches[0].pageX - bannerTrack.offsetLeft;
+        bannerTrack.scrollLeft = scrollLeft - (x - startX) * 1.5;
+      });
+    }
+  </script>
+  
+</body>
+</html>
